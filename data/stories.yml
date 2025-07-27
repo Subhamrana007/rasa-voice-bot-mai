@@ -1,0 +1,67 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: user asks for japanese word
+  steps:
+  - intent: ask_japanese_word
+  - action: utter_japanese_word
+
+- story: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# --- New stories for the new skills ---
+
+- story: user asks how are you
+  steps:
+  - intent: ask_how_are_you
+  - action: utter_ask_how_are_you
+
+- story: user asks name
+  steps:
+  - intent: ask_what_is_your_name
+  - action: utter_ask_what_is_your_name
+
+- story: user asks about creator
+  steps:
+  - intent: ask_about_creator
+  - action: utter_ask_about_creator
+
+- story: user gives a compliment
+  steps:
+  - intent: compliment
+  - action: utter_compliment
+
+- story: user asks what bot can do
+  steps:
+  - intent: ask_what_can_do
+  - action: utter_ask_what_can_do

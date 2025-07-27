@@ -1,0 +1,130 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - mojn
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - I'm so happy
+    - so happy
+    - happy
+    - cheerful
+    - well
+    - good
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: ask_japanese_word
+  examples: |
+    - teach me a japanese word
+    - can you teach me some japanese
+    - tell me a word in japanese
+
+- intent: ask_how_are_you
+  examples: |
+    - how are you?
+    - how are things?
+    - how is it going?
+    - are you okay?
+
+- intent: ask_what_is_your_name
+  examples: |
+    - what is your name?
+    - what should I call you?
+    - who are you?
+
+- intent: ask_about_creator
+  examples: |
+    - who made you?
+    - who is your creator?
+    - who built you?
+
+- intent: compliment
+  examples: |
+    - you are great
+    - you're a good bot
+    - that was awesome
+    - you are the best
+
+- intent: ask_what_can_do
+  examples: |
+    - what can you do?
+    - what are your powers?
+    - what skills do you have?

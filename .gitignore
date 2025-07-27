@@ -1,0 +1,16 @@
+# Virtual Environment
+venv/
+__pycache__/
+*.pyc
+
+# Rasa files
+models/*.tar.gz
+.rasa/
+results/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Audio files generated at runtime
+*.mp3
