@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Terminal</title>
+    <style>
+        /* --- Basic Setup & Theming --- */
+        body {
+            font-family: 'Courier Prime', monospace;
+            background-color: #0d0208; /* Dark purple background */
+            color: #f472b6; /* Main text color - Pink */
+            padding: 20px;
+            overflow-y: auto;
+            font-size: 1rem;
+        }
+
+        /* --- Chat Log Styling --- */
+        #chat-log {
+            padding-bottom: 100px; /* Space for the input bar */
+        }
+
+        .line {
+            margin-bottom: 8px;
+            white-space: pre-wrap; /* Allows text to wrap */
+            word-break: break-all;
+        }
+
+        .line::before {
+            content: 'Mai> ';
+            color: #a855f7; /* Prompt color - Purple */
+        }
+
+        .user-line::before {
+            content: 'User> ';
+            color: #60a5fa; /* User prompt color - Blue */
+        }
+
+        /* --- Input Bar Styling --- */
+        #input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: #0d0208;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+        }
+
+        #chat-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #f472b6;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: #f472b6;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="chat-log">
+        <!-- Chat messages will be added here by JavaScript -->
+    </div>
+    <div id="input-container">
+        <span class="line" id="input-line">
+            <input type="text" id="chat-input" autofocus autocomplete="off">
+            <span class="cursor"></span>
+        </span>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const RASA_SERVER_URL = 'http://localhost:5005/webhooks/rest/webhook';
+        const SENDER_ID = 'user';
+
+        let isTyping = false;
+        let japaneseVoice = null;
+
+        // --- NEW: Text-to-Speech Functionality ---
+
+        /**
+         * Loads the available voices and finds a Japanese one.
+         */
+        function loadVoices() {
+            const voices = window.speechSynthesis.getVoices();
+            japaneseVoice = voices.find(voice => voice.lang.startsWith('ja'));
+            if (!japaneseVoice) {
+                console.warn("No Japanese voice found. Using default.");
+            }
+        }
+
+        /**
+         * Speaks the given text using the Web Speech API.
+         * @param {string} text - The text to be spoken.
+         */
+        function speak(text) {
+            // Cancel any previous speech
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            if (japaneseVoice) {
+                utterance.voice = japaneseVoice;
+            }
+            utterance.rate = 1.1; // Slightly faster speech
+            utterance.pitch = 1;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Load voices when they are ready
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+        loadVoices(); // Initial attempt
+
+        // --- End of new TTS code ---
+
+
+        function typeText(element, text, callback) {
+            isTyping = true;
+            let i = 0;
+            element.innerHTML = "";
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    window.scrollTo(0, document.body.scrollHeight);
+                } else {
+                    clearInterval(interval);
+                    isTyping = false;
+                    if (callback) callback();
+                }
+            }, 30);
+        }
+
+        function addLine(text, isUser = false) {
+            const newLine = document.createElement('div');
+            newLine.classList.add('line');
+            if (isUser) {
+                newLine.classList.add('user-line');
+                newLine.style.color = "#e0e0e0";
+            } else {
+                // --- MODIFIED: Speak Mai's response ---
+                speak(text);
+            }
+            chatLog.appendChild(newLine);
+            typeText(newLine, text);
+        }
+
+        async function sendMessageToRasa(message) {
+            try {
+                const response = await fetch(RASA_SERVER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sender: SENDER_ID, message: message })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const botResponses = await response.json();
+                
+                if (botResponses && botResponses.length > 0) {
+                    botResponses.forEach(res => addLine(res.text));
+                } else {
+                    addLine("Sumimasen, I don't have a response for that yet.");
+                }
+
+            } catch (error) {
+                console.error("Error connecting to Rasa:", error);
+                addLine("Error: Could not connect to Mai's brain. Is the Rasa server running?");
+            }
+        }
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !isTyping) {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addLine(message, true);
+                    chatInput.value = '';
+                    sendMessageToRasa(message);
+                }
+            }
+        });
+
+        function startUp() {
+            const initialText = "Konnichiwa, boss-sama! I am Mai. System online.";
+            // --- MODIFIED: Speak the initial greeting ---
+            addLine(initialText);
+        }
+
+        startUp();
+    </script>
+</body>
+</html>
