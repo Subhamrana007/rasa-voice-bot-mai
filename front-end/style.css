@@ -1,0 +1,78 @@
+/* --- Basic Setup & Theming --- */
+body {
+    font-family: 'Courier Prime', monospace;
+    color: #f472b6;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-color: #0a0510;
+}
+
+#background-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+}
+
+#floating-terminal {
+    width: 90%; max-width: 800px; height: 85vh; max-height: 700px;
+    background-color: rgba(13, 2, 8, 0.75);
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px; border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; overflow: hidden;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#title-bar {
+    background-color: rgba(31, 31, 31, 0.5); padding: 8px 12px;
+    text-align: center; color: #aaa; font-size: 0.9rem;
+    border-bottom: 1px solid #333;
+}
+
+#chat-log { 
+    flex-grow: 1; 
+    padding: 20px; 
+    overflow: hidden; /* REMOVED SCROLLBAR */
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Needed for absolute positioning of visualizer */
+}
+
+.line { margin-bottom: 8px; white-space: pre-wrap; word-break: break-all; transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; }
+.line::before { content: 'Mai> '; color: #a855f7; }
+.user-line::before { content: 'User> '; color: #60a5fa; }
+
+#input-container {
+    padding: 15px 20px; background-color: rgba(26, 26, 26, 0.5);
+    border-top: 1px solid #333; display: flex; align-items: center;
+    z-index: 3; /* Ensure input is on top */
+}
+
+#input-line { display: flex; align-items: center; background-color: rgba(13, 2, 8, 0.9); border-radius: 9999px; padding: 10px 20px; flex-grow: 1; margin-right: 10px; }
+#input-line::before { content: none; }
+#chat-input { width: 100%; background: transparent; border: none; color: #f472b6; font-size: 1rem; outline: none; font-family: 'Courier Prime', monospace; caret-color: #f472b6; }
+
+.action-button { background: none; border: none; cursor: pointer; padding: 5px; margin-left: 5px; }
+.icon { width: 24px; height: 24px; stroke: #f472b6; transition: all 0.2s ease-in-out; }
+.action-button:hover .icon { stroke: #00ffff; }
+
+/* MODIFIED: Visualizer covers the whole chat log area */
+#visualizer-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+#chat-visualizer-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* When in voice mode, hide the text lines */
+.voice-mode .line {
+    display: none;
+}
