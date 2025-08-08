@@ -64,8 +64,8 @@ function animateVisualizer() {
         const y2 = centerY + Math.sin(angle) * (radius + barHeight);
 
         const gradient = vizCtx.createLinearGradient(x, y, x2, y2);
-        gradient.addColorStop(0, '#a855f7');
-        gradient.addColorStop(1, '#f472b6');
+        gradient.addColorStop(0, '#a855f7'); // Purple
+        gradient.addColorStop(1, '#f472b6'); // Pink
 
         vizCtx.strokeStyle = gradient;
         vizCtx.lineWidth = barWidth;

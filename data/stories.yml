@@ -65,3 +65,13 @@ stories:
   steps:
   - intent: ask_what_can_do
   - action: utter_ask_what_can_do
+
+- story: user asks a general question
+  steps:
+  - intent: ask_general_question
+  - action: action_ask_gemini
+
+- story: user asks for a fact
+  steps:
+  - intent: ask_for_fact
+  - action: action_tell_fact

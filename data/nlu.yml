@@ -128,3 +128,19 @@ nlu:
     - what can you do?
     - what are your powers?
     - what skills do you have?
+
+- intent: ask_general_question
+  examples: |
+    - what is the capital of France
+    - who wrote the book to kill a mockingbird
+    - explain the theory of relativity
+    - how does a car engine work
+    - tell me about the roman empire
+    - what is quantum computing
+
+- intent: ask_for_fact
+  examples: |
+    - tell me a fact
+    - give me a random fact
+    - do you know any interesting facts?
+    - what's a fun fact

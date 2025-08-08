@@ -17,6 +17,8 @@ intents:
   - ask_about_creator
   - compliment
   - ask_what_can_do
+  - ask_general_question
+  - ask_for_fact
 
 responses:
   # --- Core Conversation Responses ---
@@ -76,6 +78,11 @@ responses:
     - text: "Of course! The word for 'thank you' is 'Arigato'."
     - text: "Hai! The word for 'cat' is 'Neko'."
     - text: "A good word to know is 'Oishii', which means 'delicious'!"
+
+
+actions:
+  - action_ask_gemini
+  - action_tell_fact
 
 session_config:
   session_expiration_time: 60
