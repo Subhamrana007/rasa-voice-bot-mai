@@ -3,4 +3,5 @@ gTTS
 pydub
 SpeechRecognition
 PyAudio
-requests
+request
+gunicorn==20.1.0
