@@ -1,14 +1,12 @@
-# It's good practice to keep one version of your main framework
+# Core Framework
 rasa==3.6.0
 
-# Pin the dependency to avoid the build error
-PyYAML==5.4.1
-
-# Other dependencies
+# Build Tools - must be listed before packages that need it
 Cython
+
+# Application Dependencies
 gTTS
-pytube
+pydub
 SpeechRecognition
-pyttsx3
 requests
 gunicorn==20.1.0
