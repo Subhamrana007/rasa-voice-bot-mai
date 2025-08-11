@@ -1,8 +1,10 @@
+# Build Tools - must be listed before packages that need it
+Cython
+
 # Core Framework
 rasa==3.6.0
 
-# Build Tools - must be listed before packages that need it
-Cython
+
 
 # Application Dependencies
 gTTS
