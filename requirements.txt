@@ -2,7 +2,7 @@
 rasa==3.6.0
 
 # Pin the dependency to avoid the build error
-PyYAML==6.0.1
+PyYAML==5.4.1
 
 # Other dependencies
 Cython
