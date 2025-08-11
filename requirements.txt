@@ -1,8 +1,14 @@
-Cython 
+# It's good practice to keep one version of your main framework
 rasa==3.6.0
+
+# Pin the dependency to avoid the build error
+PyYAML==6.0.1
+
+# Other dependencies
+Cython
 gTTS
-pydub
+pytub
 SpeechRecognition
-PyAudio
+pyttsx3
 requests
 gunicorn==20.1.0
