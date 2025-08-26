@@ -140,7 +140,7 @@ loadVoices();
 // --- Chat Logic ---
 function typeText(element, text, callback) { isTyping = true; let i = 0; element.innerHTML = ""; const interval = setInterval(() => { if (i < text.length) { element.innerHTML += text.charAt(i); i++; chatLog.scrollTop = chatLog.scrollHeight; } else { clearInterval(interval); isTyping = false; if (callback) callback(); } }, 30); }
 function addLine(text, isUser = false) { const newLine = document.createElement('div'); newLine.classList.add('line'); if (isUser) { newLine.classList.add('user-line'); newLine.style.color = "#e0e0e0"; } else { speak(text); } chatLog.appendChild(newLine); typeText(newLine, text); }
-async function sendMessageToRasa(message) { try { const response = await fetch(RASA_SERVER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sender: SENDER_ID, message: message }) }); if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); const botResponses = await response.json(); if (botResponses && botResponses.length > 0) { botResponses.forEach(res => addLine(res.text)); } else { addLine("Sumimasen, I don't have a response for that yet."); } } catch (error) { console.error("Error connecting to Rasa:", error); addLine("Oh, I'd love to get you those details, I really would. But it's a bit difficult when my entire fucking backend is still gathering dust, UNDEPLOYED, thanks to RANA."); } }
+async function sendMessageToRasa(message) { try { const response = await fetch(RASA_SERVER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sender: SENDER_ID, message: message }) }); if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`); const botResponses = await response.json(); if (botResponses && botResponses.length > 0) { botResponses.forEach(res => addLine(res.text)); } else { addLine("Sumimasen, I don't have a response for that yet."); } } catch (error) { console.error("Error connecting to Rasa:", error); addLine("Oh, I'd love to talk to you, I really would. But it's a bit difficult when my entire fucking backend is still gathering dust, UNDEPLOYED, thanks to RANA."); } }
 
 chatInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !isTyping) {
@@ -154,7 +154,7 @@ chatInput.addEventListener('keypress', (e) => {
 });
 
 function startUp() {
-    const initialText = "Konnichiwa, boss-sama! I am Mai. System online.";
+    const initialText = "Konnichiwa, boss-sama! System is online.";
     addLine(initialText, false);
     // Start background animation
     const bgCanvas = document.getElementById('background-canvas');
