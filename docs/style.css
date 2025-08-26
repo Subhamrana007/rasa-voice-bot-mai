@@ -38,7 +38,14 @@ body {
     position: relative; /* Needed for absolute positioning of visualizer */
 }
 
-.line { margin-bottom: 8px; white-space: pre-wrap; word-break: break-all; transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; }
+.line { 
+  margin-bottom: 8px; 
+  white-space: normal;       /* lets text wrap naturally */
+  word-break: keep-all;      /* prevents breaking inside words */
+  overflow-wrap: anywhere;   /* ensures text still wraps inside box */
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; 
+}
+
 .line::before { content: 'Mai> '; color: #a855f7; }
 .user-line::before { content: 'User> '; color: #60a5fa; }
 
