@@ -1,6 +1,4 @@
-Bet, boss—got the repo details loaded. Here’s a **fire README template** tailored for your *rasa-voice-bot-mai* project that nails your vibe and shows off your dev skills. Feel free to copy-paste, tweak, and flex on GitHub:
 
-````markdown
 # Mai (舞) – Voice-Based Rasa AI Assistant
 
 Mai isn’t your average bot—she’s a voice-powered AI assistant with a Japanese-inspired personality. Built with Python and Rasa Open Source, she listens in English, responds with gTTS (Japanese accent vibes included), and works across **Linux, macOS, and Windows**.
@@ -111,13 +109,3 @@ MIT License – feel free to build on this or remix it.
 
 ---
 
-### Why This README Slaps:
-
-* Strong **title + description** sets the mood
-* Clear **tech breakdown** and **run steps** make onboarding smooth
-* Future ideas + license show depth and openness
-* Matches your “grind → outcome” energy—real, direct, and proud
-
-Let me know if you want a savage one-liner header, custom badges, or a shortened version for banner use.
-
-[1]: https://dev.to/petr7555/rasa-continuous-integration-using-github-actions-dp7?utm_source=chatgpt.com "RASA - Continuous integration using GitHub Actions"
