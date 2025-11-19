@@ -105,7 +105,7 @@ MIT License – feel free to build on this or remix it.
 
 ## About
 
-**Mai (舞)** is a personal project by **Shubham Rana** to flex my skills in conversational AI, voice-powered interactions, and cross-platform Python apps. Powered by Rasa and built with authenticity and personality. Feedback, collabs, or even memes—always welcome!
+**Mai (舞)** is a personal project by **Shubham** to flex my skills in conversational AI, voice-powered interactions, and cross-platform Python apps. Powered by Rasa and built with authenticity and personality. Feedback, collabs, or even memes—always welcome!
 
 ---
 
